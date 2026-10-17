@@ -1,0 +1,14 @@
+[Unit]
+Description=ПО МЭ: ПС-3 CLI (запуск через ForceCommand SSH / консоль)
+After=network.target
+
+[Service]
+User=fw-cli
+RuntimeDirectory=fw
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/bin/python3 -m fw_cli
+Restart=on-failure
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

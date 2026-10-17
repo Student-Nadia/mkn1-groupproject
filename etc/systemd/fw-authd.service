@@ -1,0 +1,14 @@
+[Unit]
+Description=ПО МЭ: ПС-5 Авторизация
+After=network.target
+
+[Service]
+User=fw-auth
+RuntimeDirectory=fw
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/bin/python3 -m fw_authd
+Restart=on-failure
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

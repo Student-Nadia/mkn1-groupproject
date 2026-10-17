@@ -22,3 +22,25 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# C build
+*.o
+filter/fw-filter
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# LaTeX
+report/*.aux
+report/*.out
+report/*.toc
+report/*.synctex.gz
+report/*.log
+
+# Secrets / local
+*.key
+*.crt
+.env

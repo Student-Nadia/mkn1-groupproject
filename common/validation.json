@@ -1,0 +1,304 @@
+{
+  "_comment": "Единые правила проверки данных (таблицы 2 и 3, FR-13, FR-36, FR-39). ПС-3 (Python) и ПС-4 (PHP) реализуют строго по этому описанию. Черновик — уточнять вместе с командой ПС-3/ПС-4.",
+  "version": 1,
+  "rule": {
+    "id": {
+      "type": "int",
+      "min": 1,
+      "max": 65535,
+      "unique": true,
+      "required": true,
+      "errors": [
+        "M06",
+        "M07"
+      ]
+    },
+    "in": {
+      "type": "iface_or_any",
+      "default": "any"
+    },
+    "smac": {
+      "type": "mac_or_any",
+      "default": "any"
+    },
+    "dmac": {
+      "type": "mac_or_any",
+      "default": "any"
+    },
+    "src": {
+      "type": "ipv4_expr",
+      "forms": [
+        "addr",
+        "cidr(0-32)",
+        "range",
+        "any"
+      ],
+      "default": "any"
+    },
+    "dst": {
+      "type": "ipv4_expr",
+      "forms": [
+        "addr",
+        "cidr(0-32)",
+        "range",
+        "any"
+      ],
+      "default": "any"
+    },
+    "proto": {
+      "type": "enum_or_int",
+      "values": [
+        "tcp",
+        "udp",
+        "icmp",
+        "any"
+      ],
+      "int_min": 0,
+      "int_max": 255,
+      "default": "any"
+    },
+    "eth-proto": {
+      "type": "enum",
+      "values": [
+        "arp",
+        "other",
+        "any"
+      ],
+      "default": "any"
+    },
+    "sport": {
+      "type": "port_expr",
+      "min": 1,
+      "max": 65535,
+      "only_if": {
+        "proto": [
+          "tcp",
+          "udp"
+        ]
+      },
+      "default": "any"
+    },
+    "dport": {
+      "type": "port_expr",
+      "min": 1,
+      "max": 65535,
+      "only_if": {
+        "proto": [
+          "tcp",
+          "udp"
+        ]
+      },
+      "default": "any"
+    },
+    "icmp-type": {
+      "type": "int",
+      "min": 0,
+      "max": 255,
+      "only_if": {
+        "proto": [
+          "icmp"
+        ]
+      },
+      "default": "any"
+    },
+    "icmp-code": {
+      "type": "int",
+      "min": 0,
+      "max": 255,
+      "only_if": {
+        "proto": [
+          "icmp"
+        ]
+      },
+      "default": "any"
+    },
+    "action": {
+      "type": "enum",
+      "values": [
+        "accept",
+        "goto",
+        "drop"
+      ],
+      "required": true
+    },
+    "out": {
+      "type": "iface_list",
+      "required_if": {
+        "action": "accept"
+      },
+      "must_not_include": "in"
+    },
+    "to": {
+      "type": "rule_ref",
+      "required_if": {
+        "action": "goto"
+      },
+      "rule": "существует и больше номера текущего правила"
+    },
+    "state": {
+      "type": "enum",
+      "values": [
+        "on",
+        "off"
+      ],
+      "default": "off",
+      "only_if": {
+        "action": [
+          "accept"
+        ]
+      }
+    },
+    "active": {
+      "type": "enum",
+      "values": [
+        "yes",
+        "no"
+      ],
+      "default": "yes"
+    },
+    "log": {
+      "type": "enum",
+      "values": [
+        "yes",
+        "no"
+      ],
+      "default": "no"
+    },
+    "comment": {
+      "type": "string",
+      "max_len": 255,
+      "default": ""
+    }
+  },
+  "config": {
+    "tcp_syn_timeout_sec": {
+      "type": "int",
+      "min": 1,
+      "max": 86400,
+      "default": 5
+    },
+    "tcp_est_timeout_sec": {
+      "type": "int",
+      "min": 1,
+      "max": 86400,
+      "default": 3600
+    },
+    "tcp_fin_timeout_sec": {
+      "type": "int",
+      "min": 1,
+      "max": 86400,
+      "default": 30
+    },
+    "udp_timeout_no_reply": {
+      "type": "int",
+      "min": 1,
+      "max": 86400,
+      "default": 15
+    },
+    "udp_timeout_reply": {
+      "type": "int",
+      "min": 1,
+      "max": 86400,
+      "default": 60
+    },
+    "icmp_timeout_sec": {
+      "type": "int",
+      "min": 1,
+      "max": 86400,
+      "default": 5
+    },
+    "state_table_size": {
+      "type": "int",
+      "min": 1024,
+      "max": 1048576,
+      "default": 65536
+    },
+    "conntrack_enabled": {
+      "type": "bool",
+      "default": true
+    },
+    "arp_forwarding": {
+      "type": "bool",
+      "default": false
+    },
+    "ssh_port": {
+      "type": "int",
+      "min": 1,
+      "max": 65535,
+      "default": 22
+    },
+    "https_port": {
+      "type": "int",
+      "min": 1,
+      "max": 65535,
+      "default": 8443
+    },
+    "integrity_period_sec": {
+      "type": "int",
+      "min": 10,
+      "max": 3600,
+      "default": 60
+    },
+    "packets_log_max_mb": {
+      "type": "int",
+      "min": 1,
+      "max": 1024,
+      "default": 100
+    },
+    "events_log_max_mb": {
+      "type": "int",
+      "min": 1,
+      "max": 1024,
+      "default": 50
+    }
+  },
+  "account": {
+    "id": {
+      "min_len": 3,
+      "max_len": 32,
+      "pattern": "^[A-Za-z0-9_]+$",
+      "unique": true
+    },
+    "password": {
+      "min_len": 8,
+      "max_len": 128
+    },
+    "role": {
+      "values": [
+        "rw",
+        "ro"
+      ]
+    },
+    "errors": [
+      "M06"
+    ]
+  },
+  "log_filters": {
+    "events": [
+      "code",
+      "from",
+      "to"
+    ],
+    "packets": [
+      "action",
+      "in",
+      "out",
+      "rule",
+      "smac",
+      "dmac",
+      "src",
+      "dst",
+      "sport",
+      "dport",
+      "from",
+      "to"
+    ],
+    "rule": "from не позже to; адреса и порты — по форматам таблицы 2"
+  },
+  "formats": {
+    "datetime": "YYYY-MM-DD hh:mm:ss",
+    "ipv4": "a.b.c.d | a.b.c.d/len | a.b.c.d-e.f.g.h",
+    "mac": "AA:BB:CC:DD:EE:FF",
+    "port": "80 | 1024-2000"
+  }
+}

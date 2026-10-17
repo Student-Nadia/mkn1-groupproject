@@ -1,0 +1,14 @@
+[Unit]
+Description=ПО МЭ: ПС-6 Целостность
+After=network.target
+
+[Service]
+User=fw-integrity
+RuntimeDirectory=fw
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/bin/python3 -m fw_integrityd
+Restart=on-failure
+NoNewPrivileges=no
+
+[Install]
+WantedBy=multi-user.target

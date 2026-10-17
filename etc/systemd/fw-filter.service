@@ -1,0 +1,16 @@
+[Unit]
+Description=ПО МЭ: ПС-1 Фильтрация
+After=network.target
+
+[Service]
+User=fw-filter
+RuntimeDirectory=fw
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/lib/fw/bin/fw-filter
+Restart=on-failure
+AmbientCapabilities=CAP_NET_RAW
+CapabilityBoundingSet=CAP_NET_RAW
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,57 @@
+{
+  "conntrack": {
+    "tcp_syn_timeout_sec": 5,
+    "tcp_est_timeout_sec": 3600,
+    "tcp_fin_timeout_sec": 30,
+    "udp_timeout_no_reply": 15,
+    "udp_timeout_reply": 60,
+    "icmp_timeout_sec": 5,
+    "state_table_size": 65536,
+    "conntrack_enabled": true,
+    "arp_forwarding": false
+  },
+  "ifaces": [
+    {
+      "name": "eth0",
+      "addr": "",
+      "mask": "",
+      "enabled": true,
+      "is_mgmt": true
+    }
+  ],
+  "mgmt": {
+    "ssh_port": 22,
+    "https_port": 8443
+  },
+  "logd": {
+    "events_db_path": "/var/lib/fw/events.db",
+    "events_max_bytes": 52428800,
+    "packets_dump_path": "/var/lib/fw/packets.bin",
+    "packets_max_bytes": 104857600,
+    "packets_block_records": 4096,
+    "packets_flush_interval_ms": 1000
+  },
+  "cli": {
+    "page_size": 20,
+    "session_timeout_sec": 900,
+    "ping_interval_sec": 60
+  },
+  "web": {
+    "https_port": 8443,
+    "page_size": 50,
+    "session_timeout_sec": 900,
+    "csrf_protection": true
+  },
+  "authd": {
+    "accounts_path": "/etc/fw/accounts.json",
+    "hash_algo": "pbkdf2_sha256",
+    "hash_iterations": 200000
+  },
+  "integrityd": {
+    "baseline_path": "/var/lib/fw/baseline.json",
+    "backup_dir": "/var/lib/fw/backup/",
+    "hmac_key_path": "/etc/fw/hmac.key",
+    "check_period_sec": 60,
+    "files": []
+  }
+}

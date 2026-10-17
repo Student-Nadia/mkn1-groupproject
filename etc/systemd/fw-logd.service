@@ -1,0 +1,14 @@
+[Unit]
+Description=ПО МЭ: ПС-2 Регистрация
+After=network.target
+
+[Service]
+User=fw-logd
+RuntimeDirectory=fw
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/bin/python3 -m fw_logd
+Restart=on-failure
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

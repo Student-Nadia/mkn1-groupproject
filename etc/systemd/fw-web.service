@@ -1,0 +1,14 @@
+[Unit]
+Description=ПО МЭ: ПС-4 WEB (php-fpm пул)
+After=network.target
+
+[Service]
+User=fw-web
+RuntimeDirectory=fw
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/sbin/php-fpm8.2 --nodaemonize --fpm-config /etc/fw/php-fpm.conf
+Restart=on-failure
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

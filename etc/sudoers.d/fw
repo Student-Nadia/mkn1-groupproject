@@ -1,0 +1,6 @@
+# ШАБЛОН. Реальные пути и допустимые аргументы уточнить; проверять visudo -c.
+# ПС-3 и ПС-4: только фиксированный список команд, без пароля.
+Cmnd_Alias FW_SYS = /usr/sbin/ip *, /usr/sbin/route *, /usr/bin/timedatectl *, /usr/bin/systemctl restart fw-*, /usr/bin/systemctl reboot, /usr/bin/systemctl poweroff
+fw-cli, fw-web ALL=(root) NOPASSWD: FW_SYS
+# ПС-6: замена контролируемых файлов при восстановлении (скрипт добавить при реализации restore).
+# fw-integrity ALL=(root) NOPASSWD: /usr/lib/fw/bin/fw-restore *
