@@ -31,7 +31,7 @@ def leave() -> None:
     raise NotImplementedError("emergency.leave")
 
 
-def log_event(code: str, result: bool, details: dict = None, command: str = None,
+def log_event(code: str, result: bool, details: dict = None, command: str = None, actor_type: int = 1,
               actor_id: str = "integrityd", actor_ip: str = None, error_code: str = None) -> None:
     """Отправить log.write.event в ПС-2 (поля таблицы events).
     Если ПС-2 недоступна — хранить в очереди (до EVENT_QUEUE_MAX), повторять каждые EVENT_RETRY_SEC."""

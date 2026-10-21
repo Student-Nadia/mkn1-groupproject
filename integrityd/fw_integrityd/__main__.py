@@ -27,8 +27,8 @@ CHECK_PERIOD_MAX_SEC = 3600
 MAX_CONTROLLED_FILES = 64
 
 
-def load_config(path: str = "/etc/fw/config.json") -> dict:
-    """Прочитать конфигурацию ПС-6 (baseline_path, backup_dir, hmac_key_path, check_period_sec, files)."""
+def load_config(path: str) -> dict:
+    """Прочитать конфигурацию ПС-6 из JSON в /etc/fw/ (baseline_path, backup_dir, hmac_key_path, check_period_sec, files)."""
     raise NotImplementedError("main.load_config")
 
 
